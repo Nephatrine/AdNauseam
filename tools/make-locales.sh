@@ -30,7 +30,11 @@ do
     mkdir -p $dir && touch $outfile
     #echo Writing $outfile
     jq -s '.[0] * .[1]' $messages $adnfile > $outfile
-    sed -i '' "s/uBlock₀/AdNauseam/g" $outfile
+    if sed --version >/dev/null 2>&1; then
+      sed -i -e "s/uBlock₀/AdNauseam/g" $outfile
+    else
+      sed -i '' "s/uBlock₀/AdNauseam/g" $outfile
+    fi
   fi
 
 done

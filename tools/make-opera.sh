@@ -34,12 +34,17 @@ cp platform/chromium/*.js   $DES/js/
 cp platform/chromium/*.json $DES/
 cp -R platform/chromium/img $DES/
 cp platform/opera/manifest.json $DES/  # adn: overwrites chromium manifest
-sed -i '' "s/\"{version}\"/${VERSION}/" $DES/manifest.json
-sed -i '' "s/{UBLOCK_VERSION}/${UBLOCK}/" $DES/popup.html
 cp LICENSE.txt $DES/
 
-sed -i '' "s/{UBLOCK_VERSION}/${UBLOCK}/" $DES/popup.html
-sed -i '' "s/{UBLOCK_VERSION}/${UBLOCK}/" $DES/links.html
+if sed --version >/dev/null 2>&1; then
+  sed -i -e "s/\"{version}\"/${VERSION}/" $DES/manifest.json
+  sed -i -e "s/{UBLOCK_VERSION}/${UBLOCK}/" $DES/popup.html
+  sed -i -e "s/{UBLOCK_VERSION}/${UBLOCK}/" $DES/links.html
+else
+  sed -i '' "s/\"{version}\"/${VERSION}/" $DES/manifest.json
+  sed -i '' "s/{UBLOCK_VERSION}/${UBLOCK}/" $DES/popup.html
+  sed -i '' "s/{UBLOCK_VERSION}/${UBLOCK}/" $DES/links.html
+fi
 
 echo "*** adnauseam.opera: Package done."
 
