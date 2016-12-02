@@ -267,7 +267,11 @@
       if (ad.attempts >= maxAttemptsPerAd) {
 
         log('[FAILED] ' + adinfo(ad), ad); // this);
-        if (ad.title === 'Pending') ad.title = 'Failed';
+        if (ad.title === 'Pending')
+            if(e.type === 'shitlisted')
+                ad.title = 'Shit-Listed';
+            else
+                ad.title = 'Failed';
       }
 
       vAPI.messaging.broadcast({
@@ -473,21 +477,26 @@
     log('[TRYING] ' + adinfo(ad), ad.targetUrl);
 
     xhr = new XMLHttpRequest();
+    xhr.open('get', ad.targetUrl, true);
+    xhr.withCredentials = true;
+    xhr.delegate = ad;
+    xhr.timeout = visitTimeout;
+    xhr.onload = onVisitResponse;
+    xhr.onerror = onVisitError;
+    xhr.ontimeout = onVisitError;
+    xhr.responseType = ''; // 'document'?;
+
+    if (!µb.getNetClickableSwitch(µb.URI))
+    {
+        ad.attempts = 9001;
+        return onVisitError.call(xhr, {
+            type: 'shitlisted'
+        });
+    }
 
     try {
-
-      xhr.open('get', ad.targetUrl, true);
-      xhr.withCredentials = true;
-      xhr.delegate = ad;
-      xhr.timeout = visitTimeout;
-      xhr.onload = onVisitResponse;
-      xhr.onerror = onVisitError;
-      xhr.ontimeout = onVisitError;
-      xhr.responseType = ''; // 'document'?;
       xhr.send();
-
     } catch (e) {
-
       onVisitError.call(xhr, e);
     }
   }

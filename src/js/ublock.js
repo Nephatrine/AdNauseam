@@ -65,8 +65,7 @@ var matchWhitelistDirective = function(url, hostname, directive) {
 
 /******************************************************************************/
 
-µBlock.getNetFilteringSwitch = function(url) {
-    var netWhitelist = this.netWhitelist;
+µBlock.getNetGenericSwitch = function(url, netWhitelist) {
     var buckets, i, pos;
     var targetHostname = this.URI.hostnameFromURI(url);
     var key = targetHostname;
@@ -88,6 +87,14 @@ var matchWhitelistDirective = function(url, hostname, directive) {
         key = key.slice(pos + 1);
     }
     return true;
+};
+
+µBlock.getNetFilteringSwitch = function(url) {
+    return this.getNetGenericSwitch(url, this.netWhitelist);
+};
+
+µBlock.getNetClickableSwitch = function(url) {
+    return this.getNetGenericSwitch(url, this.netShitlist);
 };
 
 /******************************************************************************/

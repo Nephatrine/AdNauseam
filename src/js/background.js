@@ -101,6 +101,13 @@ return {
         ''
     ].join('\n').trim(),
 
+	netShitlist: {},
+	netShitlistModifyTime: 0,
+	netShitlistDefault: [
+		'www.infowars.com',
+		''
+	].join('\n').trim(),
+
     localSettings: {
         blockedRequestCount: 0,
         allowedRequestCount: 0

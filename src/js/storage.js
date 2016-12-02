@@ -98,6 +98,11 @@
     this.netWhitelistModifyTime = Date.now();
 };
 
+µBlock.saveShitlist = function() {
+	this.keyvalSetOne('netShitlist', this.stringFromWhitelist(this.netShitlist));
+	this.netiShitlistModifyTime = Date.now();
+};
+
 /******************************************************************************/
 
 // This will remove all unused filter list entries from
@@ -849,6 +854,11 @@
 
         if ( typeof data.netWhitelist === 'string' ) {
             bin.netWhitelist = data.netWhitelist;
+            binNotEmpty = true;
+        }
+
+        if ( typeof data.netShitlist === 'string' ) {
+            bin.netShitlist = data.netShitlist;
             binNotEmpty = true;
         }
 

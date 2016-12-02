@@ -31,6 +31,10 @@
     "message":"Whitelist",
     "description":"appears as tab name in dashboard"
   },
+  "shitlistPageName":{
+    "message":"Shitlist",
+    "description":"appears as tab name in dashboard"
+  },
   "statsPageName":{
     "message":"uBlock₀ — Logger",
     "description":"Title for the logger window"
@@ -434,6 +438,14 @@
   "whitelistApply":{
     "message":"Apply changes",
     "description":"English: Apply changes"
+  },
+  "shitlistPrompt":{
+    "message":"Your list of host names for which AUTO-CLICKING will be disabled. One entry per line. Invalid host names will be silently ignored.",
+    "description":"English: Your list of host names for which AUTO-CLICKING will be disabled. One host name per line. Invalid host names will be silently ignored."
+  },
+  "shitlistExportFilename" : {
+    "message": "my-ublock-shitlist_{{datetime}}.txt",
+    "description": "English: my-ublock-shitlist_{{datetime}}.txt"
   },
   "logRequestsHeaderType":{
     "message":"Type",

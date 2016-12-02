@@ -58,6 +58,9 @@ var handleImportFilePicker = function() {
             if ( typeof userData.netWhitelist !== 'string' ) {
                 throw 'Invalid';
             }
+            if ( typeof userData.netShitlist !== 'string' ) {
+                throw 'Invalid';
+            }
             if ( typeof userData.filterLists !== 'object' ) {
                 throw 'Invalid';
             }

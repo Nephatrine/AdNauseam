@@ -99,6 +99,7 @@ var onPSLReady = function() {
 // To bring older versions up to date
 
 var onVersionReady = function(lastVersion) {
+	// [SHIT] TODO: load default shitlist here
     // Whitelist some key scopes by default
     if ( lastVersion.localeCompare('0.8.6.0') < 0 ) {
         µb.netWhitelist = µb.whitelistFromString(
@@ -153,6 +154,11 @@ var onSelfieReady = function(selfie) {
 var onNetWhitelistReady = function(netWhitelistRaw) {
     µb.netWhitelist = µb.whitelistFromString(netWhitelistRaw);
     µb.netWhitelistModifyTime = Date.now();
+};
+
+var onNetShitlistReady = function(netShitlistRaw) {
+    µb.netShitlist = µb.whitelistFromString(netShitlistRaw);
+    µb.netShitlistModifyTime = Date.now();
 };
 
 /******************************************************************************/
@@ -228,6 +234,7 @@ var onFirstFetchReady = function(fetched) {
     onUserSettingsReady(fetched);
     fromFetch(µb.restoreBackupSettings, fetched);
     onNetWhitelistReady(fetched.netWhitelist);
+	onNetShitlistReady(fetched.netShitlist);
     onVersionReady(fetched.version);
 
     // If we have a selfie, skip loading PSL, filters
@@ -278,6 +285,7 @@ var onAdminSettingsRestored = function() {
         'lastBackupFile': '',
         'lastBackupTime': 0,
         'netWhitelist': '',
+		'netShitlist': '',
         'selfie': null,
         'selfieMagic': '',
         'version': '0.0.0.0'

@@ -128,6 +128,12 @@ var onMessage = function(request, sender, callback) {
         response = getDomainNames(request.targets);
         break;
 
+	case 'getShitlist':
+		response = {
+			shitlist: µb.stringFromWhitelist(µb.netShitlist)
+		};
+		break;
+
     case 'getWhitelist':
         response = {
           whitelist: µb.stringFromWhitelist(µb.netWhitelist),
@@ -161,6 +167,11 @@ var onMessage = function(request, sender, callback) {
     case 'selectFilterLists':
         µb.selectFilterLists(request.switches);
         break;
+
+	case 'setShitlist':
+		µb.netShitlist = µb.whitelistFromString(request.shitlist);
+		µb.saveShitlist();
+		break;
 
     case 'setWhitelist':
         µb.netWhitelist = µb.whitelistFromString(request.whitelist);
